@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+
+</head>
+
+<body>
+    <div class="manage_wrapper">
+    <div class="nav_bar">
+        {{#display}}
+        <a class="nav" href="home">Home</a>
+        
+        
+        <a href="new_gab" class="nav">Create a new Gab</a>
+        <a href="logout" class="nav">Log Out</a>
+    </div>
+
+<p class="nav"><b>{{display}}'s Gabs</b></p>
+
+{{/display}}
+
+    <div class="manage_gabs_wrapper">
+        {{#result}}
+
+        <form class="gab_container" method="post" action="/manage_gabs/{{id}}">
+            <div class="gab_inner_div">{{#.}}<b>{{author}}</b>: {{content}}{{/.}}</div>
+            <button type="submit">Delete</button>
+        </form>
+
+        {{/result}}
+    </div>
+    </div>
+
+
+    <!--{{#result}}
+    <p><b>{{author}}:</b> {{content}}</p>
+    <p>{{updatedAt}}</p>
+   
+
+    {{/result}}
+       -->
+</body>
+
+</html>

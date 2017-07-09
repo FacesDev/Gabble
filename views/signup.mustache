@@ -1,0 +1,32 @@
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="./styles.css" />
+
+</head>
+
+<body>
+    <div class="manage_wrapper">
+    <div class="nav_bar">
+    <a class="nav" href="/">Already have an account? Log In Here!</a>
+    </div>
+    <div class="manage_gabs_wrapper">
+    <form class="login" method="post" action="/signup">
+        <input class="create_gab" type="text" name="username" placeholder="Username" />
+        <input class="create_gab" type="text" name="display" placeholder="Display Name" />
+        <input class="create_gab" type="password" name="password" placeholder="Password" />
+        <input class="create_gab" type="password" name="confirm" placeholder="Confirm Password" />
+
+
+        <button class="create_button" type="submit">Submit</button> 
+        {{#errors}}
+        <p>{{msg}}</p>
+        {{/errors}}
+    </form>
+
+
+
+</div>
+</body>
+
+</html>

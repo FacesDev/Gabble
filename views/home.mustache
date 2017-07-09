@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./styles.css" />
+        
+    </head>
+    <body>
+        <div class="manage_wrapper">
+        <div class="nav_bar">
+        {{#display}}
+        
+        
+        <a class="nav" href="manage_gabs">Manage My Gabs</a>
+        <a class="nav" href="new_gab">Create a new Gab</a>
+        <a class="nav" href="logout">Log Out</a>
+        </div>
+        <p><b>Welcome Back {{display}}</b></p>
+        {{/display}}
+    
+
+     <div class="manage_gabs_wrapper">
+    {{#result}}
+    <div class="gab_container gab_home">
+    <p><b>{{author}}:</b> {{content}}</p>
+    <p>{{updatedAt}}</p>
+    </div>
+    {{/result}}
+    
+       </div>
+       </div>
+    </body>
+</html>
