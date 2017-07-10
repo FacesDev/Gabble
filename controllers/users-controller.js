@@ -1,5 +1,23 @@
 const express = require('express');
+const mustache = require('mustache-express');
+const bodyParser = require('body-parser');
+const models = require('../models')
+const session = require('express-session');
+const expressValidator = require('express-validator');
+const cookieParser = require('cookie-parser');
 const router = express.Router();
+router.use(express.static(__dirname + '/public'));
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(cookieParser());
+router.use(expressValidator());
+
+router.use(session({
+    secret: "secretkey",
+    saveUninitialized: true,
+    resave: false,
+}));
+
+
 
 
 router.get('/', async (request, response) => {
@@ -7,6 +25,7 @@ router.get('/', async (request, response) => {
 });
 
 router.post('/', async (request, response) => {
+
     request.checkBody('username', 'No Username Provided. ').notEmpty();
     request.checkBody('username', 'Must be less than 100 characters. ').matches(/^.{0,100}$/, "i");
     request.checkBody('password', 'No password was provided.  ').notEmpty();
@@ -28,9 +47,13 @@ router.post('/', async (request, response) => {
             response.render("login");
 
         } else {
+            console.log('username: ', request.body.username);
             request.session.user_name = request.body.username;
             request.session.password = request.body.password;
             request.session.display = user.display;
+            request.session.userId = user.id
+            console.log('userId: ', request.session.userId);
+
             request.session.isAuthenticated = true;
             response.redirect('/home');
         }
@@ -60,6 +83,8 @@ router.post('/signup', (request, response) => {
         };
         request.session.user_name = request.body.username;
         request.session.display = request.body.display;
+        request.session.userId = user.id;
+        console.log('userId: ', request.session.userId);
         request.session.isAuthenticated = true;
         var display = request.session.display;
         models.users.create(user);
