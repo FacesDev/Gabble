@@ -1,8 +1,24 @@
 <html>
-    <head>
-        
-    </head>
-    <body>
-    
-    </body>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="./public/styles.css" />
+</head>
+
+<body>
+
+
+     <div>
+        <div >
+            <p>Message: {{message.content}} </p>
+            <div class='likes-section'>
+                <p class="details"> Message By: {{message.author}}</p>
+                <p class="details"> {{message.updatedAt}}</p>
+            </div>
+            <p>Liked by:</p>
+            {{#likes}}
+            <p>{{#.}}{{user.username}}{{/.}}</p>
+            {{/likes}}
+        </div> 
+</body>
+
 </html>

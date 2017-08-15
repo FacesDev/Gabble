@@ -17,18 +17,12 @@ router.use(session({
     resave: false,
 }));
 
-
-
-
 router.get('/new_gab', (request, response) => {
-     if (request.session.isAuthenticated == true) {
-          console.log("userId get: ", request.session.userId);
+    if (request.session.isAuthenticated == true) {
         response.render("new_gab");
     } else {
-       
         response.redirect('/');
     }
-
 
 });
 router.post('/new_gab', async (request, response) => {
@@ -38,7 +32,6 @@ router.post('/new_gab', async (request, response) => {
         userId: request.session.userId
     };
     let result = await models.messages.create(gab);
-
     response.redirect('/home');
 });
 
@@ -54,46 +47,37 @@ router.get('/manage_gabs', async (request, response) => {
 });
 
 router.post('/manage_gabs', async (request, response) => {
-    var gab = request.body.messages;
-    var result = await models.messages.create(gab);
+    var message = request.body.messages;
+    var result = await models.messages.create(message);
     response.json(result);
 });
-
-// router.put('/manage_gabs/:id', async (request, response) => {
-//     console.log('three');
-//     var result = await models.messages.update(message, { where: { id: request.params.id } });
-//     console.log("put: ", request.params.id)
-//     response.json(result);
-// });
 
 router.post('/manage_gabs/:id', async (request, response) => {
     var result = await models.messages.destroy({ where: { id: request.params.id } });
     response.redirect('/manage_gabs');
-    // response.json(result);
+});
+
+router.post('/manage_gabs/like/:id', async (request, response) => {
+    var messageId = request.params.id;
+    var userId = request.session.userId;
+    var likes = await models.likes.find({ where: { messageId: messageId, userId: userId } });
+
+    if (!likes) {
+        var newLike = await models.likes.create({ messageId: messageId, userId: userId });
+    }
+    response.redirect('/home');
+});
+router.get('/likes/:id', async (request, response) => {
+    if (request.session.isAuthenticated == true) {
+        var messageId = request.params.id;
+        var message = await models.messages.find({ where: { id: messageId } });
+        var likes = await models.likes.findAll({ where: { messageId: messageId }, include: [models.users] });
+        var model = { message: message, likes: likes, name: request.session.name };
+        response.render('likes', model);
+    } else {
+        response.redirect('/');
+    }
 });
 
 
-
-// application.get('/messages', async (request, response) => {
-//     var result = await models.messages.all({
-//         include: [models.likes, models.users]
-//     });
-//     response.json(result);
-// });
-// application.post('/messages', async (request, response) => {
-//     var message = await request.body.messages;
-//     models.message.create(message)
-//     response.render('home', result);
-// });
-// application.put('/messages/:id', async (request, response) => {
-//     var message = request.body.messages;
-//     var result = await models.Message.update(message, { where: { id: request.params.id } });
-//     response.json(result);
-// });
-// application.delete('/messages/:id', async (request, response) => {
-//     var result = await models.Message.destroy({ where: { id: request.params.id } });
-//     response.json(result);
-
-
-// });
 module.exports = router;

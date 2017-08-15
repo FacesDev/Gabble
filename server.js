@@ -7,7 +7,6 @@ const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const usersController = require('./controllers/users-controller');
 const gabsController = require('./controllers/gabs-controller');
-const likesController = require('./controllers/likes-controller');
 const application = express();
 
 application.engine('mustache', mustache());
@@ -19,7 +18,6 @@ application.use(cookieParser());
 application.use(expressValidator());
 application.use(usersController);
 application.use(gabsController);
-application.use(likesController);
 application.use(session({
     secret: "secretkey",
     saveUninitialized: true,

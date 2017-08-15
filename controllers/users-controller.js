@@ -18,14 +18,11 @@ router.use(session({
 }));
 
 
-
-
 router.get('/', async (request, response) => {
     response.render("login");
 });
 
 router.post('/', async (request, response) => {
-
     request.checkBody('username', 'No Username Provided. ').notEmpty();
     request.checkBody('username', 'Must be less than 100 characters. ').matches(/^.{0,100}$/, "i");
     request.checkBody('password', 'No password was provided.  ').notEmpty();
@@ -94,7 +91,10 @@ router.post('/signup', (request, response) => {
 
 router.get('/home', async (request, response) => {
     if (request.session.isAuthenticated == true) {
-        var result = await models.messages.all();
+        var result = await models.messages.all({
+             order: [['createdAt', 'DESC']],
+            include: [models.users, models.likes]
+        });
         var display = request.session.display;
         var model = { result: result, display: display };
         response.render("home", model);
