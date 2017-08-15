@@ -1,45 +1,98 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <title>Gabble Home</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <div class="manage_wrapper">
-        <div class="nav_bar">
-            {{#display}}
-
-
-            <a class="nav" href="manage_gabs">Manage My Gabs</a>
-            <a class="nav" href="new_gab">Create a new Gab</a>
-            <a class="nav" href="logout">Log Out</a>
-        </div>
-        <p><b>Welcome Back {{display}}</b></p>
-        {{/display}}
-
-
-        <div class="manage_gabs_wrapper">
-            {{#result}}
-            <div class="gab_container gab_home">
-                <p><b>{{author}}:</b> {{content}}</p>
-                <p>{{updatedAt}}</p>
-
-                <div >
-                    <a href="./likes/{{id}}">{{likes.length}} Likes </a>
-                    
-                    <form action="./manage_gabs/like/{{id}}" method="POST">
-                        <button type="submit">Like</button>
-                    </form>
-                </div>
-
-
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" href="home"><b>Home</b></a>
             </div>
-            {{/result}}
-
-
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li> <a class="navbar-brand" href="manage_gabs"><b>Manage Messages</b></a></li>
+                </ul>
+            </div>
         </div>
     </div>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row flex">
+                <div class="col-lg-6">
+                    {{#display}}
+                    <h1>Welcome Back {{display}} </h1>
+                    {{/display}}
+                    <form class="form-inline" role="form" method='post' action='/new_gab'>
+                        <div class="form-group">
+                            <textarea class="form-control" name="gab" cols="40" rows="5" placeholder="Type a Gab"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning btn-lg">Post</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="assets/img/ipad-hand.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h1>Your Messages</h1>
+            </div>
+        </div>
+        <div class="row mt centered">
+            <div class="col-lg-4 flex">
+                {{#result}}
+                <div class="card flex-wrap">
+                    <h3 class="card-title">{{author}}</h3>
+                    <p class="card-text">{{content}}</p>
+                    <p>{{updatedAt}}</p>
+                    <a href="./likes/{{id}}">{{likes.length}} Likes </a>
+                    <form action="./manage_gabs/like/{{id}}" method="POST">
+                        <button class="btn btn-primary" type="submit">Like</button>
+                    </form>
+                </div>
+                {{/result}}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <hr>
+        <div class="row centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Invite A Friend to Gabble!</button>
+                </form>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <hr>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>

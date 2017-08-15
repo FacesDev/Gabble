@@ -1,41 +1,71 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <title>Gabble Home</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-    <div class="manage_wrapper">
-        <div class="nav_bar">
-            {{#display}}
-            <a class="nav" href="home">Home</a>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" href="home"><b>Home</b></a>
+            </div>
 
-
-            <a href="new_gab" class="nav">Create a new Gab</a>
-            <a href="logout" class="nav">Log Out</a>
         </div>
-
-        <p class="nav"><b>{{display}}'s Gabs</b></p>
-
-        {{/display}}
-
-        <div class="manage_gabs_wrapper">
+    </div>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row flex">
+                <div class="col-lg-6">
+                    {{#display}}
+                    <h1>{{display}} Messages </h1>
+                    {{/display}}
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-responsive" src="assets/img/ipad-hand.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h1>Your Messages</h1>
+            </div>
+        </div>
+        <div class="col-lg-4 flex">
             {{#result}}
-
-            <a href="/manage_gabs/likes/{{id}}">{{likes.length}} Likes </a></div>
+            <div class="card flex-wrap">
+                <h3 class="card-title">{{author}}</h3>
+                <p class="card-text">{{content}}</p>
+                <a href="/likes/{{id}}">{{likes.length}} Likes </a>
+            <form class="btn btn-primary" method="post" action="/manage_gabs/{{id}}">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {{/result}}
     </div>
-   
-    <form class="gab_container" method="post" action="/manage_gabs/{{id}}">
-        <div class="gab_inner_div">{{#.}}<b>{{author}}</b>: {{content}}{{/.}}</div>
-        <button type="submit">Delete</button>
-    </form>
-
-    {{/result}}
+    </div>
     </div>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>

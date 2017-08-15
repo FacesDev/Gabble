@@ -53,7 +53,10 @@ router.post('/manage_gabs', async (request, response) => {
 });
 
 router.post('/manage_gabs/:id', async (request, response) => {
-    var result = await models.messages.destroy({ where: { id: request.params.id } });
+    var findMessage= { where: { id: request.params.id } };
+    var findLikes = { where: { messageId: request.params.id }, include: [models.users] };
+    var deleteLikes = await models.likes.destroy(findLikes);
+    var deleteMessage = await models.messages.destroy(findMessage);
     response.redirect('/manage_gabs');
 });
 

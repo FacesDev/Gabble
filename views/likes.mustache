@@ -5,10 +5,8 @@
 </head>
 
 <body>
-
-
-     <div>
-        <div >
+    <div>
+        <div>
             <p>Message: {{message.content}} </p>
             <div class='likes-section'>
                 <p class="details"> Message By: {{message.author}}</p>
@@ -18,7 +16,6 @@
             {{#likes}}
             <p>{{#.}}{{user.username}}{{/.}}</p>
             {{/likes}}
-        </div> 
+        </div>
 </body>
-
 </html>
