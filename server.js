@@ -7,6 +7,7 @@ const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
 const usersController = require('./controllers/users-controller');
 const gabsController = require('./controllers/gabs-controller');
+
 const application = express();
 
 application.engine('mustache', mustache());

@@ -1,21 +1,89 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="./public/styles.css" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
+    <title>Manage Messages</title>
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,900' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
-    <div>
-        <div>
-            <p>Message: {{message.content}} </p>
-            <div class='likes-section'>
-                <p class="details"> Message By: {{message.author}}</p>
-                <p class="details"> {{message.updatedAt}}</p>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"><a class="navbar-brand" href="/home"><b>Home</b></a></span>
+            <span class="icon-bar"><a class="navbar-brand" href="/manage_gabs"><b>Manage Messages</b></a></span>
+            <span class="icon-bar"><a class="navbar-brand" href="/logout"><b>Logout</b></a></span>
+          </button>
+                <a class="navbar-brand" href="/home"><b>Home</b></a>
             </div>
-            <p>Liked by:</p>
-            {{#likes}}
-            <p>{{#.}}{{user.username}}{{/.}}</p>
-            {{/likes}}
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="navbar-brand" href="/manage_gabs"><b>Manage Messages</b></a></li>
+                    <li> <a class="navbar-brand" href="logout"><b>Logout</b></a></li>
+                </ul>
+            </div>
+
         </div>
+    </div>
+    <div id="headerwrap">
+        <div class="container">
+            <div class="row flex">
+                <div class="col-lg-6">
+                    {{#display}}
+                    <h1>{{display}} Messages </h1>
+                    {{/display}}
+                </div>
+                <div class="col-lg-4">
+                    <img class="img-responsive" src="../assets/img/ipad-hand.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row mt centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <h1>Your Message Likes</h1>
+            </div>
+        </div>
+        <div class="row mt centered">
+                <div class="col-lg-4 flex flex-center">
+                    <div class="card flex-wrap card-background-color">
+                        <div class="card-image"></div>
+                        <h3 class="card-title">Message By: {{message.author}}</h3>
+                        <p class="card-text">{{message.updatedAt}}</p>
+                        <p>Liked by:</p>
+                        {{#likes}}
+                        <p>{{#.}}{{user.username}}{{/.}}</p>
+                        {{/likes}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+        <div class="row centered">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter your email address">
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Invite A Friend to Gabble!</button>
+                </form>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <hr>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -81,12 +81,43 @@ a:after {
 .flex {
     display:flex;
     flex-wrap:wrap;
+    width:100%;
 }
 .flex-wrap{
     flex: 0 1 calc(25% - 10px);
     border: 3px solid #3498db;
     border-radius: .25rem;
     margin: 5px;
+    height: 20em;
+    display:flex;
+    flex-direction: column;
+
+}
+.background-image {    
+    background-size: cover;
+    background-image: url(../img/backgroundImage.jpg);
+    background-repeat: no-repeat;
+}
+.card-background-color{
+    background-size: cover;
+    background-color:antiquewhite;
+    background-repeat: no-repeat;
+    
+}
+.flex-center{
+    justify-content: center;
+}
+.card-image {
+    background-image: url(../img/cardHeaderImage.jpg);
+    height:26%;
+    background-size:cover;
+}
+.likes-box{
+    display:flex;
+    justify-content:center;
+}
+.likes-margin{
+    margin-right:1em;
 }
  hr {
     display: block;

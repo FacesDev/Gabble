@@ -5,6 +5,7 @@ const models = require('../models')
 const session = require('express-session');
 const expressValidator = require('express-validator');
 const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 const router = express.Router();
 router.use(express.static(__dirname + '/public'));
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +18,13 @@ router.use(session({
     resave: false,
 }));
 
+function hashPassword(password) {
+    const secret = 'abcdefg';
+    const hash = crypto.createHmac('sha256', secret)
+        .update(password)
+        .digest('hex');
+    return hash
+};
 
 router.get('/', async (request, response) => {
     response.render("login");
@@ -36,7 +44,7 @@ router.post('/', async (request, response) => {
         var user = await models.users.findOne({
             where: {
                 username: request.body.username,
-                password: request.body.password
+                password: hashPassword(request.body.password)
             }
         })
         if (!user) {
@@ -45,7 +53,7 @@ router.post('/', async (request, response) => {
 
         } else {
             request.session.user_name = request.body.username;
-            request.session.password = request.body.password;
+            request.session.password = hashPassword(request.body.password);
             request.session.display = user.display;
             request.session.userId = user.id
             request.session.isAuthenticated = true;
@@ -72,7 +80,7 @@ router.post('/signup', (request, response) => {
     else {
         var user = {
             username: request.body.username,
-            password: request.body.password,
+            password: hashPassword(request.body.password),
             display: request.body.display
         };
         request.session.user_name = request.body.username;
@@ -84,7 +92,6 @@ router.post('/signup', (request, response) => {
         response.redirect('home');
     }
 });
-
 router.get('/home', async (request, response) => {
     if (request.session.isAuthenticated == true) {
         var result = await models.messages.all({

@@ -20,14 +20,15 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="icon-bar"><a class="navbar-brand" href="manage_gabs"><b>Manage Messages</b></a></span>
+            <span class="icon-bar"><a class="navbar-brand" href="logout"><b>Logout</b></a></span>
           </button>
                 <a class="navbar-brand" href="home"><b>Home</b></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li> <a class="navbar-brand" href="manage_gabs"><b>Manage Messages</b></a></li>
+                    <li> <a class="navbar-brand" href="logout"><b>Logout</b></a></li>
                 </ul>
             </div>
         </div>
@@ -58,23 +59,27 @@
                 <h1>Your Messages</h1>
             </div>
         </div>
+
         <div class="row mt centered">
             <div class="col-lg-4 flex">
                 {{#result}}
-                <div class="card flex-wrap">
+                <div class="card flex-wrap card-background-color">
+                    <div class="card-image"></div>
                     <h3 class="card-title">{{author}}</h3>
                     <p class="card-text">{{content}}</p>
                     <p>{{updatedAt}}</p>
-                    <a href="./likes/{{id}}">{{likes.length}} Likes </a>
-                    <form action="./manage_gabs/like/{{id}}" method="POST">
-                        <button class="btn btn-primary" type="submit">Like</button>
-                    </form>
+                    <div class="likes-box">
+                        <a class="likes-margin" href="./likes/{{id}}">{{likes.length}} Likes </a>
+                        <form action="./manage_gabs/like/{{id}}" method="POST">
+                            <button class="btn btn-primary" type="submit"><img src="assets/img/likeButton.png" width="25em" ></button>
+                        </form>
+                    </div>
                 </div>
                 {{/result}}
             </div>
         </div>
     </div>
-    </div>
+</div>
 
     <div class="container">
         <hr>
