@@ -25,4 +25,8 @@ application.use(session({
     resave: false,
 }));
 
-application.listen(3000);
+application.set('port'), process.env.PORT || 3000)
+
+application.listen(application.get('port'), function () {
+    console.log('app starting on port: ', app.get('port'))
+});
