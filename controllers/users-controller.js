@@ -26,7 +26,7 @@ function hashPassword(password) {
     return hash
 };
 
-router.get('/', async (request, response) => {
+router.get('/', (request, response) => {
     response.render("login");
 });
 
