@@ -1,23 +1,23 @@
 {
   "development": {
-    "username": "solderedmachd",
-    "password": null,
+    "username": "vipvotjjixqtxo",
+    "password": "22fc428ac521ba5f9dccd8c621f8a58537abe23e77d753977f5c6f49d2360cad",
     "database": "d2p2i7nkd29q1a",
-    "host": "127.0.0.1",
+    "host": "ec2-54-163-233-201.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
-    "username": "solderedmachd",
-    "password": null,
+    "username": "vipvotjjixqtxo",
+    "password": "22fc428ac521ba5f9dccd8c621f8a58537abe23e77d753977f5c6f49d2360cad",
     "database": "d2p2i7nkd29q1a",
-    "host": "127.0.0.1",
+    "host": "ec2-54-163-233-201.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "production": {
-    "username": "solderedmachd",
-    "password": null,
+    "username": "vipvotjjixqtxo",
+    "password": "22fc428ac521ba5f9dccd8c621f8a58537abe23e77d753977f5c6f49d2360cad",
     "database": "d2p2i7nkd29q1a",
-    "host": "127.0.0.1",
+    "host": "ec2-54-163-233-201.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
