@@ -30,6 +30,7 @@ application.set('port', process.env.PORT || 3000)
 application.listen(application.get('port'), function () {
     console.log('app starting on port: ', application.get('port'))
 });
+
 var pg = require('pg');
 
 pg.defaults.ssl = true;
